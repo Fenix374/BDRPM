@@ -67,36 +67,19 @@ CREATE TABLE Review (
     comment TEXT
 );
 
--- категории
 INSERT INTO Category (name) VALUES ('Action'), ('RPG'), ('Simulator');
-
--- пользователи
 INSERT INTO Users (name, email) VALUES ('Alex', 'alex@example.com'), ('Maria', 'maria@example.com');
-
--- адреса
 INSERT INTO Address (user_id, city, street, house_number, postal_code) 
 VALUES (1, 'Moscow', 'Lenina', '10', '101000'), (2, 'St. Petersburg', 'Pushkina', '20', '102000');
-
--- методы оплаты
 INSERT INTO Payment_Method (method) VALUES ('Credit Card'), ('PayPal');
-
--- игры
 INSERT INTO Game (title, developer, price, category_id)
 VALUES ('Game A', 'Dev A', 199.99, 1), ('Game B', 'Dev B', 59.99, 2), ('Game C', 'Dev C', 99.99, 1);
-
--- скидки
 INSERT INTO Discount (description, percentage) VALUES ('New Year Discount', 10), ('Loyalty Discount', 15);
-
--- заказы
-INSERT INTO Orders (user_id, order_date, total_amount, payment_method_id) VALUES (1, '2024-10-01', 259.98, 1), (2, '2024-10-05', 199.99, 2);
-
--- детали заказов
-INSERT INTO Order_Details (order_id, game_id, quantity, price) VALUES (1, 1, 1, 199.99), (1, 2, 1, 59.99), (2, 3, 1, 99.99);
-
--- скидка на заказ
+INSERT INTO Orders (user_id, order_date, total_amount, payment_method_id) 
+VALUES (1, '2024-10-01', 259.98, 1), (2, '2024-10-05', 199.99, 2);
+INSERT INTO Order_Details (order_id, game_id, quantity, price) 
+VALUES (1, 1, 1, 199.99), (1, 2, 1, 59.99), (2, 3, 1, 99.99);
 INSERT INTO Order_Discount (order_id, discount_id) VALUES (1, 1);
-
--- отзывы
 INSERT INTO Review (user_id, game_id, rating, comment) VALUES (1, 1, 5, 'Great game!'), (2, 2, 4, 'Interesting storyline.');
 
 SELECT * FROM Orders
@@ -115,6 +98,8 @@ WHERE title LIKE 'Game%';
 SELECT AVG(price) AS average_price FROM Game;
 
 SELECT MAX(total_amount) AS max_total FROM Orders;
+
+SELECT MIN(total_amount) AS min_total FROM Orders;
 
 SELECT COUNT(*) AS total_orders FROM Orders;
 
